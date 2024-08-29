@@ -63,7 +63,6 @@
         }
 
         #grade-scale-options {
-            display: none;
             margin-top: 20px;
         }
 
@@ -74,9 +73,8 @@
         }
 
         #grade-scale-settings {
-            display: none;
-            text-align: left;
             margin-top: 20px;
+            text-align: left;
         }
     </style>
 </head>
@@ -92,8 +90,6 @@
         <button id="reset-wrong">Reset Number Wrong</button>
         <div id="result">10/10 = 100%</div>
         
-        <button id="customize-grade-scale">Customize Grade Scale</button>
-        
         <!-- Grade Scale Options -->
         <div id="grade-scale-options">
             <label><input type="radio" name="grade-scale" value="basic" checked> Use Basic A, B, C, D, F Scale</label>
@@ -103,7 +99,35 @@
 
         <!-- Grade Scale Settings -->
         <div id="grade-scale-settings">
-            <!-- Settings will dynamically show based on user's selection -->
+            <!-- Basic scale settings are shown by default -->
+            <h3>Basic A, B, C, D, F Scale</h3>
+            <table>
+                <tr>
+                    <td><label for="grade-a">Grade A:</label></td>
+                    <td><input type="number" id="grade-a" value="90"></td>
+                    <td>% to 100%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-b">Grade B:</label></td>
+                    <td><input type="number" id="grade-b" value="80"></td>
+                    <td>% to 89%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-c">Grade C:</label></td>
+                    <td><input type="number" id="grade-c" value="70"></td>
+                    <td>% to 79%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-d">Grade D:</label></td>
+                    <td><input type="number" id="grade-d" value="60"></td>
+                    <td>% to 69%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-f">Grade F:</label></td>
+                    <td><input type="number" id="grade-f" value="0"></td>
+                    <td>% to 59%</td>
+                </tr>
+            </table>
         </div>
 
         <div id="quick-chart">
@@ -123,10 +147,6 @@
     </div>
 
     <script>
-        document.getElementById('customize-grade-scale').addEventListener('click', () => {
-            document.getElementById('grade-scale-options').style.display = 'block';
-        });
-
         document.getElementById('apply-scale-selection').addEventListener('click', () => {
             const selectedScale = document.querySelector('input[name="grade-scale"]:checked').value;
             configureGradeScale(selectedScale);
