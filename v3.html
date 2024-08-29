@@ -77,6 +77,11 @@
             margin-bottom: 8px;
         }
 
+        #grade-scale-settings label span {
+            min-width: 80px;
+            text-align: left;
+        }
+
         #grade-scale-settings input[type="number"] {
             width: 80px;
             text-align: center;
@@ -105,19 +110,19 @@
         <!-- Detailed Grade Scale Customization -->
         <div id="grade-scale-settings">
             <h3>Customize Grade Scale</h3>
-            <label>Grade A+: <input type="number" id="grade-a-plus" value="97"> % to 100%</label>
-            <label>Grade A: <input type="number" id="grade-a" value="93"> % to 96%</label>
-            <label>Grade A-: <input type="number" id="grade-a-minus" value="90"> % to 92%</label>
-            <label>Grade B+: <input type="number" id="grade-b-plus" value="87"> % to 89%</label>
-            <label>Grade B: <input type="number" id="grade-b" value="83"> % to 86%</label>
-            <label>Grade B-: <input type="number" id="grade-b-minus" value="80"> % to 82%</label>
-            <label>Grade C+: <input type="number" id="grade-c-plus" value="77"> % to 79%</label>
-            <label>Grade C: <input type="number" id="grade-c" value="73"> % to 76%</label>
-            <label>Grade C-: <input type="number" id="grade-c-minus" value="70"> % to 72%</label>
-            <label>Grade D+: <input type="number" id="grade-d-plus" value="67"> % to 69%</label>
-            <label>Grade D: <input type="number" id="grade-d" value="63"> % to 66%</label>
-            <label>Grade D-: <input type="number" id="grade-d-minus" value="60"> % to 62%</label>
-            <label>Grade F: <input type="number" id="grade-f" value="0"> % to 59%</label>
+            <label><span>Grade A+:</span> <input type="number" id="grade-a-plus" value="97"> % to 100%</label>
+            <label><span>Grade A:</span> <input type="number" id="grade-a" value="93"> % to 96%</label>
+            <label><span>Grade A-:</span> <input type="number" id="grade-a-minus" value="90"> % to 92%</label>
+            <label><span>Grade B+:</span> <input type="number" id="grade-b-plus" value="87"> % to 89%</label>
+            <label><span>Grade B:</span> <input type="number" id="grade-b" value="83"> % to 86%</label>
+            <label><span>Grade B-:</span> <input type="number" id="grade-b-minus" value="80"> % to 82%</label>
+            <label><span>Grade C+:</span> <input type="number" id="grade-c-plus" value="77"> % to 79%</label>
+            <label><span>Grade C:</span> <input type="number" id="grade-c" value="73"> % to 76%</label>
+            <label><span>Grade C-:</span> <input type="number" id="grade-c-minus" value="70"> % to 72%</label>
+            <label><span>Grade D+:</span> <input type="number" id="grade-d-plus" value="67"> % to 69%</label>
+            <label><span>Grade D:</span> <input type="number" id="grade-d" value="63"> % to 66%</label>
+            <label><span>Grade D-:</span> <input type="number" id="grade-d-minus" value="60"> % to 62%</label>
+            <label><span>Grade F:</span> <input type="number" id="grade-f" value="0"> % to 59%</label>
             <button id="apply-grade-scale">Apply Grade Scale</button>
         </div>
 
@@ -217,7 +222,7 @@
             calculateGrade();
         });
 
-      document.getElementById('num-questions').addEventListener('input', calculateGrade);
+        document.getElementById('num-questions').addEventListener('input', calculateGrade);
         document.getElementById('num-wrong').addEventListener('input', calculateGrade);
 
         document.getElementById('apply-grade-scale').addEventListener('click', () => {
