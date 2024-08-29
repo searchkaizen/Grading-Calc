@@ -62,32 +62,21 @@
             text-align: center;
         }
 
-        #grade-scale-settings {
+        #grade-scale-options {
+            display: none;
             margin-top: 20px;
-            text-align: left;
-            display: none; /* Hide by default */
         }
 
-        #grade-scale-settings table {
-            width: 100%;
-        }
-
-        #grade-scale-settings th, 
-        #grade-scale-settings td {
-            padding: 5px;
-            text-align: left;
-        }
-
-        #apply-grade-scale {
-            margin-top: 10px; 
+        #grade-scale-options label {
             display: block;
-            width: 100%;
+            margin-bottom: 10px;
+            font-size: 18px;
         }
 
-        .grade-option {
-            display: flex;
-            align-items: center;
-            margin-bottom: 5px;
+        #grade-scale-settings {
+            display: none;
+            text-align: left;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -103,111 +92,18 @@
         <button id="reset-wrong">Reset Number Wrong</button>
         <div id="result">10/10 = 100%</div>
         
-        <button id="toggle-grade-scale">Customize Grade Scale</button>
+        <button id="customize-grade-scale">Customize Grade Scale</button>
         
-        <!-- Detailed Grade Scale Customization -->
+        <!-- Grade Scale Options -->
+        <div id="grade-scale-options">
+            <label><input type="radio" name="grade-scale" value="basic" checked> Use Basic A, B, C, D, F Scale</label>
+            <label><input type="radio" name="grade-scale" value="expanded"> Use Expanded A+, A, A-, etc. Scale</label>
+            <button id="apply-scale-selection">Apply Selection</button>
+        </div>
+
+        <!-- Grade Scale Settings -->
         <div id="grade-scale-settings">
-            <h3>Customize Grade Scale</h3>
-            <div class="grade-option">
-                <input type="checkbox" id="enable-grade-a-plus" checked>
-                <label for="enable-grade-a-plus">Enable A+</label>
-            </div>
-            <div class="grade-option">
-                <input type="checkbox" id="enable-grade-a-minus" checked>
-                <label for="enable-grade-a-minus">Enable A-</label>
-            </div>
-            <div class="grade-option">
-                <input type="checkbox" id="enable-grade-b-plus" checked>
-                <label for="enable-grade-b-plus">Enable B+</label>
-            </div>
-            <div class="grade-option">
-                <input type="checkbox" id="enable-grade-b-minus" checked>
-                <label for="enable-grade-b-minus">Enable B-</label>
-            </div>
-            <div class="grade-option">
-                <input type="checkbox" id="enable-grade-c-plus" checked>
-                <label for="enable-grade-c-plus">Enable C+</label>
-            </div>
-            <div class="grade-option">
-                <input type="checkbox" id="enable-grade-c-minus" checked>
-                <label for="enable-grade-c-minus">Enable C-</label>
-            </div>
-            <div class="grade-option">
-                <input type="checkbox" id="enable-grade-d-plus" checked>
-                <label for="enable-grade-d-plus">Enable D+</label>
-            </div>
-            <div class="grade-option">
-                <input type="checkbox" id="enable-grade-d-minus" checked>
-                <label for="enable-grade-d-minus">Enable D-</label>
-            </div>
-            <table>
-                <tr>
-                    <td><label for="grade-a-plus">Grade A+:</label></td>
-                    <td><input type="number" id="grade-a-plus" value="97"></td>
-                    <td>% to 100%</td>
-                </tr>
-                <tr>
-                    <td><label for="grade-a">Grade A:</label></td>
-                    <td><input type="number" id="grade-a" value="93"></td>
-                    <td>% to 96%</td>
-                </tr>
-                <tr>
-                    <td><label for="grade-a-minus">Grade A-:</label></td>
-                    <td><input type="number" id="grade-a-minus" value="90"></td>
-                    <td>% to 92%</td>
-                </tr>
-                <tr>
-                    <td><label for="grade-b-plus">Grade B+:</label></td>
-                    <td><input type="number" id="grade-b-plus" value="87"></td>
-                    <td>% to 89%</td>
-                </tr>
-                <tr>
-                    <td><label for="grade-b">Grade B:</label></td>
-                    <td><input type="number" id="grade-b" value="83"></td>
-                    <td>% to 86%</td>
-                </tr>
-                <tr>
-                    <td><label for="grade-b-minus">Grade B-:</label></td>
-                    <td><input type="number" id="grade-b-minus" value="80"></td>
-                    <td>% to 82%</td>
-                </tr>
-                <tr>
-                    <td><label for="grade-c-plus">Grade C+:</label></td>
-                    <td><input type="number" id="grade-c-plus" value="77"></td>
-                    <td>% to 79%</td>
-                </tr>
-                <tr>
-                    <td><label for="grade-c">Grade C:</label></td>
-                    <td><input type="number" id="grade-c" value="73"></td>
-                    <td>% to 76%</td>
-                </tr>
-                <tr>
-                    <td><label for="grade-c-minus">Grade C-:</label></td>
-                    <td><input type="number" id="grade-c-minus" value="70"></td>
-                    <td>% to 72%</td>
-                </tr>
-                <tr>
-                    <td><label for="grade-d-plus">Grade D+:</label></td>
-                    <td><input type="number" id="grade-d-plus" value="67"></td>
-                    <td>% to 69%</td>
-                </tr>
-                <tr>
-                    <td><label for="grade-d">Grade D:</label></td>
-                    <td><input type="number" id="grade-d" value="63"></td>
-                    <td>% to 66%</td>
-                </tr>
-                <tr>
-                    <td><label for="grade-d-minus">Grade D-:</label></td>
-                    <td><input type="number" id="grade-d-minus" value="60"></td>
-                    <td>% to 62%</td>
-                </tr>
-                <tr>
-                    <td><label for="grade-f">Grade F:</label></td>
-                    <td><input type="number" id="grade-f" value="0"></td>
-                    <td>% to 59%</td>
-                </tr>
-            </table>
-            <button id="apply-grade-scale">Apply Grade Scale</button>
+            <!-- Settings will dynamically show based on user's selection -->
         </div>
 
         <div id="quick-chart">
@@ -227,6 +123,127 @@
     </div>
 
     <script>
+        document.getElementById('customize-grade-scale').addEventListener('click', () => {
+            document.getElementById('grade-scale-options').style.display = 'block';
+        });
+
+        document.getElementById('apply-scale-selection').addEventListener('click', () => {
+            const selectedScale = document.querySelector('input[name="grade-scale"]:checked').value;
+            configureGradeScale(selectedScale);
+        });
+
+        function configureGradeScale(scale) {
+            const gradeScaleSettings = document.getElementById('grade-scale-settings');
+            gradeScaleSettings.innerHTML = ''; // Clear previous settings
+
+            if (scale === 'basic') {
+                gradeScaleSettings.innerHTML = `
+                    <h3>Basic A, B, C, D, F Scale</h3>
+                    <table>
+                        <tr>
+                            <td><label for="grade-a">Grade A:</label></td>
+                            <td><input type="number" id="grade-a" value="90"></td>
+                            <td>% to 100%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-b">Grade B:</label></td>
+                            <td><input type="number" id="grade-b" value="80"></td>
+                            <td>% to 89%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-c">Grade C:</label></td>
+                            <td><input type="number" id="grade-c" value="70"></td>
+                            <td>% to 79%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-d">Grade D:</label></td>
+                            <td><input type="number" id="grade-d" value="60"></td>
+                            <td>% to 69%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-f">Grade F:</label></td>
+                            <td><input type="number" id="grade-f" value="0"></td>
+                            <td>% to 59%</td>
+                        </tr>
+                    </table>
+                `;
+            } else if (scale === 'expanded') {
+                gradeScaleSettings.innerHTML = `
+                    <h3>Expanded A+, A, A-, etc. Scale</h3>
+                    <table>
+                        <tr>
+                            <td><label for="grade-a-plus">Grade A+:</label></td>
+                            <td><input type="number" id="grade-a-plus" value="97"></td>
+                            <td>% to 100%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-a">Grade A:</label></td>
+                            <td><input type="number" id="grade-a" value="93"></td>
+                            <td>% to 96%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-a-minus">Grade A-:</label></td>
+                            <td><input type="number" id="grade-a-minus" value="90"></td>
+                            <td>% to 92%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-b-plus">Grade B+:</label></td>
+                            <td><input type="number" id="grade-b-plus" value="87"></td>
+                            <td>% to 89%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-b">Grade B:</label></td>
+                            <td><input type="number" id="grade-b" value="83"></td>
+                            <td>% to 86%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-b-minus">Grade B-:</label></td>
+                            <td><input type="number" id="grade-b-minus" value="80"></td>
+                            <td>% to 82%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-c-plus">Grade C+:</label></td>
+                            <td><input type="number" id="grade-c-plus" value="77"></td>
+                            <td>% to 79%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-c">Grade C:</label></td>
+                            <td><input type="number" id="grade-c" value="73"></td>
+                            <td>% to 76%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-c-minus">Grade C-:</label></td>
+                            <td><input type="number" id="grade-c-minus" value="70"></td>
+                            <td>% to 72%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-d-plus">Grade D+:</label></td>
+                            <td><input type="number" id="grade-d-plus" value="67"></td>
+                            <td>% to 69%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-d">Grade D:</label></td>
+                            <td><input type="number" id="grade-d" value="63"></td>
+                            <td>% to 66%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-d-minus">Grade D-:</label></td>
+                            <td><input type="number" id="grade-d-minus" value="60"></td>
+                            <td>% to 62%</td>
+                        </tr>
+                        <tr>
+                            <td><label for="grade-f">Grade F:</label></td>
+                            <td><input type="number" id="grade-f" value="0"></td>
+                            <td>% to 59%</td>
+                        </tr>
+                    </table>
+                `;
+            }
+
+            // Show the grade scale settings
+            gradeScaleSettings.style.display = 'block';
+        }
+
         function calculateGrade() {
             let numQuestions = parseInt(document.getElementById('num-questions').value);
             let numWrong = parseInt(document.getElementById('num-wrong').value);
@@ -240,34 +257,45 @@
         }
 
         function determineLetterGrade(percentage) {
+            const selectedScale = document.querySelector('input[name="grade-scale"]:checked').value;
             let grade = 'F'; // Default grade
 
-            if (document.getElementById('enable-grade-a-plus').checked && percentage >= parseInt(document.getElementById('grade-a-plus').value)) {
-                grade = 'A+';
-            } else if (percentage >= parseInt(document.getElementById('grade-a').value)) {
-                grade = 'A';
-            } else if (document.getElementById('enable-grade-a-minus').checked && percentage >= parseInt(document.getElementById('grade-a-minus').value)) {
-                grade = 'A-';
-            } else if (document.getElementById('enable-grade-b-plus').checked && percentage >= parseInt(document.getElementById('grade-b-plus').value)) {
-                grade = 'B+';
-            } else if (percentage >= parseInt(document.getElementById('grade-b').value)) {
-                grade = 'B';
-            } else if (document.getElementById('enable-grade-b-minus').checked && percentage >= parseInt(document.getElementById('grade-b-minus').value)) {
-                grade = 'B-';
-            } else if (document.getElementById('enable-grade-c-plus').checked && percentage >= parseInt(document.getElementById('grade-c-plus').value)) {
-                grade = 'C+';
-            } else if (percentage >= parseInt(document.getElementById('grade-c').value)) {
-                grade = 'C';
-            } else if (document.getElementById('enable-grade-c-minus').checked && percentage >= parseInt(document.getElementById('grade-c-minus').value)) {
-                grade = 'C-';
-            } else if (document.getElementById('enable-grade-d-plus').checked && percentage >= parseInt(document.getElementById('grade-d-plus').value)) {
-                grade = 'D+';
-            } else if (percentage >= parseInt(document.getElementById('grade-d').value)) {
-                grade = 'D';
-            } else if (document.getElementById('enable-grade-d-minus').checked && percentage >= parseInt(document.getElementById('grade-d-minus').value)) {
-                grade = 'D-';
+            if (selectedScale === 'expanded') {
+                if (percentage >= parseInt(document.getElementById('grade-a-plus').value)) {
+                    grade = 'A+';
+                } else if (percentage >= parseInt(document.getElementById('grade-a').value)) {
+                    grade = 'A';
+                } else if (percentage >= parseInt(document.getElementById('grade-a-minus').value)) {
+                    grade = 'A-';
+                } else if (percentage >= parseInt(document.getElementById('grade-b-plus').value)) {
+                    grade = 'B+';
+                } else if (percentage >= parseInt(document.getElementById('grade-b').value)) {
+                    grade = 'B';
+                } else if (percentage >= parseInt(document.getElementById('grade-b-minus').value)) {
+                    grade = 'B-';
+                } else if (percentage >= parseInt(document.getElementById('grade-c-plus').value)) {
+                    grade = 'C+';
+                } else if (percentage >= parseInt(document.getElementById('grade-c').value)) {
+                    grade = 'C';
+                } else if (percentage >= parseInt(document.getElementById('grade-c-minus').value)) {
+                    grade = 'C-';
+                } else if (percentage >= parseInt(document.getElementById('grade-d-plus').value)) {
+                    grade = 'D+';
+                } else if (percentage >= parseInt(document.getElementById('grade-d').value)) {
+                    grade = 'D';
+                } else if (percentage >= parseInt(document.getElementById('grade-d-minus').value)) {
+                    grade = 'D-';
+                }
             } else {
-                grade = 'F';
+                if (percentage >= parseInt(document.getElementById('grade-a').value)) {
+                    grade = 'A';
+                } else if (percentage >= parseInt(document.getElementById('grade-b').value)) {
+                    grade = 'B';
+                } else if (percentage >= parseInt(document.getElementById('grade-c').value)) {
+                    grade = 'C';
+                } else if (percentage >= parseInt(document.getElementById('grade-d').value)) {
+                    grade = 'D';
+                }
             }
 
             return grade;
@@ -299,19 +327,9 @@
         document.getElementById('num-questions').addEventListener('input', calculateGrade);
         document.getElementById('num-wrong').addEventListener('input', calculateGrade);
 
-        document.getElementById('apply-grade-scale').addEventListener('click', () => {
-            calculateGrade(); // Recalculate grades based on the new scale
+        document.getElementById('apply-scale-selection').addEventListener('click', () => {
+            calculateGrade(); // Recalculate grades based on the selected scale
             updateQuickChart(parseInt(document.getElementById('num-questions').value));
-        });
-
-        // Toggle grade scale settings visibility
-        document.getElementById('toggle-grade-scale').addEventListener('click', () => {
-            let gradeScaleSettings = document.getElementById('grade-scale-settings');
-            if (gradeScaleSettings.style.display === 'none' || gradeScaleSettings.style.display === '') {
-                gradeScaleSettings.style.display = 'block';
-            } else {
-                gradeScaleSettings.style.display = 'none';
-            }
         });
 
         // Initial calculations
