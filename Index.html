@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #grade-calculator {
+            max-width: 400px;
+            margin: 0 auto;
+            border: 2px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #d35400;
+        }
+
+        #quick-chart {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="grade-calculator">
+        <label>Number of questions: 
+            <input type="number" id="num-questions" value="10">
+        </label>
+        <label>Number wrong: 
+            <input type="number" id="num-wrong" value="0">
+        </label>
+        <button id="increment-wrong">+1 Wrong</button>
+        <button id="reset-wrong">Reset Number Wrong</button>
+        <div id="result">10/10 = 100%</div>
+        <div id="quick-chart">
+            <h3>Quick Chart</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th># Wrong</th>
+                        <th>Grade (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="chart-body">
+                    <!-- Chart rows will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function calculateGrade() {
+            let numQuestions = parseInt(document.getElementById('num-questions').value);
+            let numWrong = parseInt(document.getElementById('num-wrong').value);
+            let correct = numQuestions - numWrong;
+            let percentage = (correct / numQuestions) * 100;
+            document.getElementById('result').innerText = `${correct}/${numQuestions} = ${percentage.toFixed(2)}%`;
+
+            updateQuickChart(numQuestions);
+        }
+
+        function updateQuickChart(totalQuestions) {
+            let tbody = document.getElementById('chart-body');
+            tbody.innerHTML = ''; // Clear the current chart
+
+            for (let i = 0; i <= totalQuestions; i++) {
+                let grade = ((totalQuestions - i) / totalQuestions) * 100;
+                let row = `<tr><td>${i}</td><td>${grade.toFixed(2)}%</td></tr>`;
+                tbody.innerHTML += row;
+            }
+        }
+
+        document.getElementById('increment-wrong').addEventListener('click', () => {
+            let numWrong = parseInt(document.getElementById('num-wrong').value);
+            document.getElementById('num-wrong').value = numWrong + 1;
+            calculateGrade();
+        });
+
+        document.getElementById('reset-wrong').addEventListener('click', () => {
+            document.getElementById('num-wrong').value = 0;
+            calculateGrade();
+        });
+
+        document.getElementById('num-questions').addEventListener('input', calculateGrade);
+        document.getElementById('num-wrong').addEventListener('input', calculateGrade);
+
+        // Initial calculations
+        calculateGrade();
+    </script>
+</body>
+</html>
