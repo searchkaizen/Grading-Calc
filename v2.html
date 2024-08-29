@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #grade-calculator {
+            max-width: 500px;
+            margin: 0 auto;
+            border: 2px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #d35400;
+        }
+
+        #quick-chart {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #grade-scale-settings {
+            margin-top: 20px;
+            text-align: left;
+            display: none; /* Hide by default */
+        }
+
+        #grade-scale-settings label {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="grade-calculator">
+        <label>Number of questions: 
+            <input type="number" id="num-questions" value="10">
+        </label>
+        <label>Number wrong: 
+            <input type="number" id="num-wrong" value="0">
+        </label>
+        <button id="increment-wrong">+1 Wrong</button>
+        <button id="reset-wrong">Reset Number Wrong</button>
+        <div id="result">10/10 = 100%</div>
+        
+        <button id="toggle-grade-scale">Customize Grade Scale</button>
+        
+        <!-- Detailed Grade Scale Customization -->
+        <div id="grade-scale-settings">
+            <h3>Customize Grade Scale</h3>
+            <label>Grade A+: <input type="number" id="grade-a-plus" value="97"> % to 100%</label>
+            <label>Grade A: <input type="number" id="grade-a" value="93"> % to 96%</label>
+            <label>Grade A-: <input type="number" id="grade-a-minus" value="90"> % to 92%</label>
+            <label>Grade B+: <input type="number" id="grade-b-plus" value="87"> % to 89%</label>
+            <label>Grade B: <input type="number" id="grade-b" value="83"> % to 86%</label>
+            <label>Grade B-: <input type="number" id="grade-b-minus" value="80"> % to 82%</label>
+            <label>Grade C+: <input type="number" id="grade-c-plus" value="77"> % to 79%</label>
+            <label>Grade C: <input type="number" id="grade-c" value="73"> % to 76%</label>
+            <label>Grade C-: <input type="number" id="grade-c-minus" value="70"> % to 72%</label>
+            <label>Grade D+: <input type="number" id="grade-d-plus" value="67"> % to 69%</label>
+            <label>Grade D: <input type="number" id="grade-d" value="63"> % to 66%</label>
+            <label>Grade D-: <input type="number" id="grade-d-minus" value="60"> % to 62%</label>
+            <label>Grade F: <input type="number" id="grade-f" value="0"> % to 59%</label>
+            <button id="apply-grade-scale">Apply Grade Scale</button>
+        </div>
+
+        <div id="quick-chart">
+            <h3>Quick Chart</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th># Wrong</th>
+                        <th>Grade (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="chart-body">
+                    <!-- Chart rows will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function calculateGrade() {
+            let numQuestions = parseInt(document.getElementById('num-questions').value);
+            let numWrong = parseInt(document.getElementById('num-wrong').value);
+            let correct = numQuestions - numWrong;
+            let percentage = (correct / numQuestions) * 100;
+
+            let grade = determineLetterGrade(percentage);
+            document.getElementById('result').innerText = `${correct}/${numQuestions} = ${percentage.toFixed(2)}% (${grade})`;
+
+            updateQuickChart(numQuestions);
+        }
+
+        function determineLetterGrade(percentage) {
+            let gradeAPlus = parseInt(document.getElementById('grade-a-plus').value);
+            let gradeA = parseInt(document.getElementById('grade-a').value);
+            let gradeAMinus = parseInt(document.getElementById('grade-a-minus').value);
+            let gradeBPlus = parseInt(document.getElementById('grade-b-plus').value);
+            let gradeB = parseInt(document.getElementById('grade-b').value);
+            let gradeBMinus = parseInt(document.getElementById('grade-b-minus').value);
+            let gradeCPlus = parseInt(document.getElementById('grade-c-plus').value);
+            let gradeC = parseInt(document.getElementById('grade-c').value);
+            let gradeCMinus = parseInt(document.getElementById('grade-c-minus').value);
+            let gradeDPlus = parseInt(document.getElementById('grade-d-plus').value);
+            let gradeD = parseInt(document.getElementById('grade-d').value);
+            let gradeDMinus = parseInt(document.getElementById('grade-d-minus').value);
+            let gradeF = parseInt(document.getElementById('grade-f').value);
+
+            if (percentage >= gradeAPlus) {
+                return 'A+';
+            } else if (percentage >= gradeA) {
+                return 'A';
+            } else if (percentage >= gradeAMinus) {
+                return 'A-';
+            } else if (percentage >= gradeBPlus) {
+                return 'B+';
+            } else if (percentage >= gradeB) {
+                return 'B';
+            } else if (percentage >= gradeBMinus) {
+                return 'B-';
+            } else if (percentage >= gradeCPlus) {
+                return 'C+';
+            } else if (percentage >= gradeC) {
+                return 'C';
+            } else if (percentage >= gradeCMinus) {
+                return 'C-';
+            } else if (percentage >= gradeDPlus) {
+                return 'D+';
+            } else if (percentage >= gradeD) {
+                return 'D';
+            } else if (percentage >= gradeDMinus) {
+                return 'D-';
+            } else {
+                return 'F';
+            }
+        }
+
+        function updateQuickChart(totalQuestions) {
+            let tbody = document.getElementById('chart-body');
+            tbody.innerHTML = ''; // Clear the current chart
+
+            for (let i = 0; i <= totalQuestions; i++) {
+                let grade = ((totalQuestions - i) / totalQuestions) * 100;
+                let letterGrade = determineLetterGrade(grade);
+                let row = `<tr><td>${i}</td><td>${grade.toFixed(2)}% (${letterGrade})</td></tr>`;
+                tbody.innerHTML += row;
+            }
+        }
+
+        document.getElementById('increment-wrong').addEventListener('click', () => {
+            let numWrong = parseInt(document.getElementById('num-wrong').value);
+            document.getElementById('num-wrong').value = numWrong + 1;
+            calculateGrade();
+        });
+
+        document.getElementById('reset-wrong').addEventListener('click', () => {
+            document.getElementById('num-wrong').value = 0;
+            calculateGrade();
+        });
+
+        document.getElementById('num-questions').addEventListener('input', calculateGrade);
+        document.getElementById('num-wrong').addEventListener('input', calculateGrade);
+
+        document.getElementById('apply-grade-scale').addEventListener('click', () => {
+            calculateGrade(); // Recalculate grades based on the new scale
+        });
+
+      // Toggle grade scale settings visibility
+        document.getElementById('toggle-grade-scale').addEventListener('click', () => {
+            let gradeScaleSettings = document.getElementById('grade-scale-settings');
+            if (gradeScaleSettings.style.display === 'none' || gradeScaleSettings.style.display === '') {
+                gradeScaleSettings.style.display = 'block';
+            } else {
+                gradeScaleSettings.style.display = 'none';
+            }
+        });
+
+        // Initial calculations
+        calculateGrade();
+    </script>
+</body>
+</html>
