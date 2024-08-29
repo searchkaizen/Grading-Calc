@@ -110,15 +110,35 @@
             <h3>Customize Grade Scale</h3>
             <div class="grade-option">
                 <input type="checkbox" id="enable-grade-a-plus" checked>
-                <label for="enable-grade-a-plus">Enable A+ (A+)</label>
-            </div>
-            <div class="grade-option">
-                <input type="checkbox" id="enable-grade-a" checked>
-                <label for="enable-grade-a">Enable A (A)</label>
+                <label for="enable-grade-a-plus">Enable A+</label>
             </div>
             <div class="grade-option">
                 <input type="checkbox" id="enable-grade-a-minus" checked>
-                <label for="enable-grade-a-minus">Enable A- (A-)</label>
+                <label for="enable-grade-a-minus">Enable A-</label>
+            </div>
+            <div class="grade-option">
+                <input type="checkbox" id="enable-grade-b-plus" checked>
+                <label for="enable-grade-b-plus">Enable B+</label>
+            </div>
+            <div class="grade-option">
+                <input type="checkbox" id="enable-grade-b-minus" checked>
+                <label for="enable-grade-b-minus">Enable B-</label>
+            </div>
+            <div class="grade-option">
+                <input type="checkbox" id="enable-grade-c-plus" checked>
+                <label for="enable-grade-c-plus">Enable C+</label>
+            </div>
+            <div class="grade-option">
+                <input type="checkbox" id="enable-grade-c-minus" checked>
+                <label for="enable-grade-c-minus">Enable C-</label>
+            </div>
+            <div class="grade-option">
+                <input type="checkbox" id="enable-grade-d-plus" checked>
+                <label for="enable-grade-d-plus">Enable D+</label>
+            </div>
+            <div class="grade-option">
+                <input type="checkbox" id="enable-grade-d-minus" checked>
+                <label for="enable-grade-d-minus">Enable D-</label>
             </div>
             <table>
                 <tr>
@@ -224,27 +244,27 @@
 
             if (document.getElementById('enable-grade-a-plus').checked && percentage >= parseInt(document.getElementById('grade-a-plus').value)) {
                 grade = 'A+';
-            } else if (document.getElementById('enable-grade-a').checked && percentage >= parseInt(document.getElementById('grade-a').value)) {
+            } else if (percentage >= parseInt(document.getElementById('grade-a').value)) {
                 grade = 'A';
             } else if (document.getElementById('enable-grade-a-minus').checked && percentage >= parseInt(document.getElementById('grade-a-minus').value)) {
                 grade = 'A-';
-            } else if (percentage >= parseInt(document.getElementById('grade-b-plus').value)) {
+            } else if (document.getElementById('enable-grade-b-plus').checked && percentage >= parseInt(document.getElementById('grade-b-plus').value)) {
                 grade = 'B+';
             } else if (percentage >= parseInt(document.getElementById('grade-b').value)) {
                 grade = 'B';
-            } else if (percentage >= parseInt(document.getElementById('grade-b-minus').value)) {
+            } else if (document.getElementById('enable-grade-b-minus').checked && percentage >= parseInt(document.getElementById('grade-b-minus').value)) {
                 grade = 'B-';
-            } else if (percentage >= parseInt(document.getElementById('grade-c-plus').value)) {
+            } else if (document.getElementById('enable-grade-c-plus').checked && percentage >= parseInt(document.getElementById('grade-c-plus').value)) {
                 grade = 'C+';
             } else if (percentage >= parseInt(document.getElementById('grade-c').value)) {
                 grade = 'C';
-            } else if (percentage >= parseInt(document.getElementById('grade-c-minus').value)) {
+            } else if (document.getElementById('enable-grade-c-minus').checked && percentage >= parseInt(document.getElementById('grade-c-minus').value)) {
                 grade = 'C-';
-            } else if (percentage >= parseInt(document.getElementById('grade-d-plus').value)) {
+            } else if (document.getElementById('enable-grade-d-plus').checked && percentage >= parseInt(document.getElementById('grade-d-plus').value)) {
                 grade = 'D+';
             } else if (percentage >= parseInt(document.getElementById('grade-d').value)) {
                 grade = 'D';
-            } else if (percentage >= parseInt(document.getElementById('grade-d-minus').value)) {
+            } else if (document.getElementById('enable-grade-d-minus').checked && percentage >= parseInt(document.getElementById('grade-d-minus').value)) {
                 grade = 'D-';
             } else {
                 grade = 'F';
@@ -281,6 +301,7 @@
 
         document.getElementById('apply-grade-scale').addEventListener('click', () => {
             calculateGrade(); // Recalculate grades based on the new scale
+            updateQuickChart(parseInt(document.getElementById('num-questions').value));
         });
 
         // Toggle grade scale settings visibility
