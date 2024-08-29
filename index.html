@@ -1,1 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
 
+        #grade-calculator {
+            max-width: 400px;
+            margin: 0 auto;
+            border: 2px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #d35400;
+        }
+
+        #quick-chart {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #grade-scale-settings {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #grade-scale-settings label {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="grade-calculator">
+        <label>Number of questions: 
+            <input type="number" id="num-questions" value="10">
+        </label>
+        <label>Number wrong: 
+            <input type="number" id="num-wrong" value="0">
+        </label>
+        <button id="increment-wrong">+1 Wrong</button>
+        <button id="reset-wrong">Reset Number Wrong</button>
+        <div id="result">10/10 = 100%</div>
+        
+        <!-- Grade Scale Customization -->
+        <div id="grade-scale-settings">
+            <h3>Customize Grade Scale</h3>
+            <label>Grade A: <input type="number" id="grade-a" value="90"> % and above</label>
+            <label>Grade B: <input type="number" id="grade-b" value="80"> % and above</label>
+            <label>Grade C: <input type="number" id="grade-c" value="70"> % and above</label>
+            <label>Grade D: <input type="number" id="grade-d" value="60"> % and above</label>
+            <label>Grade F: <input type="number" id="grade-f" value="0"> % and above</label>
+            <button id="apply-grade-scale">Apply Grade Scale</button>
+        </div>
+
+        <div id="quick-chart">
+            <h3>Quick Chart</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th># Wrong</th>
+                        <th>Grade (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="chart-body">
+                    <!-- Chart rows will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function calculateGrade() {
+            let numQuestions = parseInt(document.getElementById('num-questions').value);
+            let numWrong = parseInt(document.getElementById('num-wrong').value);
+            let correct = numQuestions - numWrong;
+            let percentage = (correct / numQuestions) * 100;
+
+            let grade = determineLetterGrade(percentage);
+            document.getElementById('result').innerText = `${correct}/${numQuestions} = ${percentage.toFixed(2)}% (${grade})`;
+
+            updateQuickChart(numQuestions);
+        }
+
+        function determineLetterGrade(percentage) {
+            let gradeA = parseInt(document.getElementById('grade-a').value);
+            let gradeB = parseInt(document.getElementById('grade-b').value);
+            let gradeC = parseInt(document.getElementById('grade-c').value);
+            let gradeD = parseInt(document.getElementById('grade-d').value);
+            let gradeF = parseInt(document.getElementById('grade-f').value);
+
+            if (percentage >= gradeA) {
+                return 'A';
+            } else if (percentage >= gradeB) {
+                return 'B';
+            } else if (percentage >= gradeC) {
+                return 'C';
+            } else if (percentage >= gradeD) {
+                return 'D';
+            } else {
+                return 'F';
+            }
+        }
+
+        function updateQuickChart(totalQuestions) {
+            let tbody = document.getElementById('chart-body');
+            tbody.innerHTML = ''; // Clear the current chart
+
+            for (let i = 0; i <= totalQuestions; i++) {
+                let grade = ((totalQuestions - i) / totalQuestions) * 100;
+                let letterGrade = determineLetterGrade(grade);
+                let row = `<tr><td>${i}</td><td>${grade.toFixed(2)}% (${letterGrade})</td></tr>`;
+                tbody.innerHTML += row;
+            }
+        }
+
+        document.getElementById('increment-wrong').addEventListener('click', () => {
+            let numWrong = parseInt(document.getElementById('num-wrong').value);
+            document.getElementById('num-wrong').value = numWrong + 1;
+            calculateGrade();
+        });
+
+        document.getElementById('reset-wrong').addEventListener('click', () => {
+            document.getElementById('num-wrong').value = 0;
+            calculateGrade();
+        });
+
+        document.getElementById('num-questions').addEventListener('input', calculateGrade);
+        document.getElementById('num-wrong').addEventListener('input', calculateGrade);
+
+        document.getElementById('apply-grade-scale').addEventListener('click', () => {
+            calculateGrade(); // Recalculate grades based on the new scale
+        });
+
+        // Initial calculations
+        calculateGrade();
+    </script>
+</body>
+</html>
