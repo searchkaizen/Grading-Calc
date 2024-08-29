@@ -12,7 +12,7 @@
         }
 
         #grade-calculator {
-            max-width: 500px;
+            max-width: 400px;
             margin: 0 auto;
             border: 2px solid #ccc;
             padding: 20px;
@@ -20,34 +20,33 @@
         }
 
         label {
-            display: block;
-            margin: 5px 0;
             font-size: 16px;
+            margin: 5px 0;
         }
 
         input[type="number"] {
             width: 50px;
             padding: 5px;
             font-size: 16px;
-            margin-left: 10px;
+            text-align: center;
         }
 
         button {
-            margin: 8px;
-            padding: 8px 16px;
+            margin: 10px 0;
+            padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
         }
 
         #result {
-            margin: 15px 0;
+            margin: 20px 0;
             font-size: 22px;
             font-weight: bold;
             color: #d35400;
         }
 
         #quick-chart {
-            margin-top: 15px;
+            margin-top: 20px;
             text-align: left;
         }
 
@@ -64,31 +63,25 @@
         }
 
         #grade-scale-settings {
-            margin-top: 15px;
+            margin-top: 20px;
             text-align: left;
             display: none; /* Hide by default */
         }
 
-        #grade-scale-settings label {
-            font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3px; /* Reduced spacing between rows */
+        #grade-scale-settings table {
+            width: 100%;
         }
 
-        #grade-scale-settings label span {
-            min-width: 50px; /* Further reduced width */
+        #grade-scale-settings th, 
+        #grade-scale-settings td {
+            padding: 5px;
             text-align: left;
         }
 
-        #grade-scale-settings input[type="number"] {
-            width: 50px; /* Adjusted to match previous versions */
-            text-align: center;
-        }
-
         #apply-grade-scale {
-            margin-top: 10px; /* Reduced spacing above the button */
+            margin-top: 10px; 
+            display: block;
+            width: 100%;
         }
     </style>
 </head>
@@ -109,19 +102,73 @@
         <!-- Detailed Grade Scale Customization -->
         <div id="grade-scale-settings">
             <h3>Customize Grade Scale</h3>
-            <label><span>Grade A+:</span> <input type="number" id="grade-a-plus" value="97"> % to 100%</label>
-            <label><span>Grade A:</span> <input type="number" id="grade-a" value="93"> % to 96%</label>
-            <label><span>Grade A-:</span> <input type="number" id="grade-a-minus" value="90"> % to 92%</label>
-            <label><span>Grade B+:</span> <input type="number" id="grade-b-plus" value="87"> % to 89%</label>
-            <label><span>Grade B:</span> <input type="number" id="grade-b" value="83"> % to 86%</label>
-            <label><span>Grade B-:</span> <input type="number" id="grade-b-minus" value="80"> % to 82%</label>
-            <label><span>Grade C+:</span> <input type="number" id="grade-c-plus" value="77"> % to 79%</label>
-            <label><span>Grade C:</span> <input type="number" id="grade-c" value="73"> % to 76%</label>
-            <label><span>Grade C-:</span> <input type="number" id="grade-c-minus" value="70"> % to 72%</label>
-            <label><span>Grade D+:</span> <input type="number" id="grade-d-plus" value="67"> % to 69%</label>
-            <label><span>Grade D:</span> <input type="number" id="grade-d" value="63"> % to 66%</label>
-            <label><span>Grade D-:</span> <input type="number" id="grade-d-minus" value="60"> % to 62%</label>
-            <label><span>Grade F:</span> <input type="number" id="grade-f" value="0"> % to 59%</label>
+            <table>
+                <tr>
+                    <td><label for="grade-a-plus">Grade A+:</label></td>
+                    <td><input type="number" id="grade-a-plus" value="97"></td>
+                    <td>% to 100%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-a">Grade A:</label></td>
+                    <td><input type="number" id="grade-a" value="93"></td>
+                    <td>% to 96%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-a-minus">Grade A-:</label></td>
+                    <td><input type="number" id="grade-a-minus" value="90"></td>
+                    <td>% to 92%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-b-plus">Grade B+:</label></td>
+                    <td><input type="number" id="grade-b-plus" value="87"></td>
+                    <td>% to 89%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-b">Grade B:</label></td>
+                    <td><input type="number" id="grade-b" value="83"></td>
+                    <td>% to 86%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-b-minus">Grade B-:</label></td>
+                    <td><input type="number" id="grade-b-minus" value="80"></td>
+                    <td>% to 82%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-c-plus">Grade C+:</label></td>
+                    <td><input type="number" id="grade-c-plus" value="77"></td>
+                    <td>% to 79%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-c">Grade C:</label></td>
+                    <td><input type="number" id="grade-c" value="73"></td>
+                    <td>% to 76%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-c-minus">Grade C-:</label></td>
+                    <td><input type="number" id="grade-c-minus" value="70"></td>
+                    <td>% to 72%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-d-plus">Grade D+:</label></td>
+                    <td><input type="number" id="grade-d-plus" value="67"></td>
+                    <td>% to 69%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-d">Grade D:</label></td>
+                    <td><input type="number" id="grade-d" value="63"></td>
+                    <td>% to 66%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-d-minus">Grade D-:</label></td>
+                    <td><input type="number" id="grade-d-minus" value="60"></td>
+                    <td>% to 62%</td>
+                </tr>
+                <tr>
+                    <td><label for="grade-f">Grade F:</label></td>
+                    <td><input type="number" id="grade-f" value="0"></td>
+                    <td>% to 59%</td>
+                </tr>
+            </table>
             <button id="apply-grade-scale">Apply Grade Scale</button>
         </div>
 
